@@ -13,9 +13,33 @@ function divide(a, b) {
     return a / b;
 }
 
-let firstNum = 0;
-let secondNum = 0;
+let firstNum = "";
+let secondNum = "";
 let operator = "";
+
+let displayValue = "";
+
+const scr = document.querySelector(".screen");
+scr.textContent = displayValue;
+
+const numbers = document.querySelectorAll(".number");
+numbers.forEach((button) => 
+    button.addEventListener("click", function() {
+        displayValue += button.textContent;
+        scr.textContent = displayValue;
+    }));
+
+const operators = document.querySelectorAll(".operator");
+operators.forEach((button) =>
+    button.addEventListener("click", function() {
+        scr.textContent = button.textContent;
+    }))
+
+const reset = document.querySelector("#reset");
+reset.addEventListener("click", function() {
+    displayValue = "";
+    scr.textContent = displayValue;
+})
 
 function operate(operator, a, b) {
     if (operator === "+") {
@@ -28,3 +52,5 @@ function operate(operator, a, b) {
         return divide(a, b);
     }
 }
+
+
