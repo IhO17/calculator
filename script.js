@@ -16,30 +16,51 @@ function divide(a, b) {
 let firstNum = "";
 let secondNum = "";
 let operator = "";
-
 let displayValue = "";
 
 const scr = document.querySelector(".screen");
-scr.textContent = displayValue;
+scr.textContent = 0;
 
 const numbers = document.querySelectorAll(".number");
+const operators = document.querySelectorAll(".operator");
+
 numbers.forEach((button) => 
     button.addEventListener("click", function() {
-        displayValue += button.textContent;
+        if (displayValue.length < 15) {
+            displayValue += button.textContent;
+        }
         scr.textContent = displayValue;
     }));
 
-const operators = document.querySelectorAll(".operator");
 operators.forEach((button) =>
     button.addEventListener("click", function() {
-        scr.textContent = button.textContent;
+        if (operator === "") {
+            if (firstNum === "") {
+                firstNum = parseInt(displayValue);
+                console.log("1st " + firstNum);
+            }
+            operator = button.textContent;
+        } else {
+            secondNum = parseInt(displayValue);
+            console.log("2nd " + secondNum);
+            let result = operate(operator, firstNum, secondNum);
+            scr.textContent = result;
+            firstNum = result;
+            operator = "";
+            secondNum = "";
+            
+        }
+        displayValue = "";
+
     }))
 
-const reset = document.querySelector("#reset");
-reset.addEventListener("click", function() {
+function reset() {
+    firstNum = "";
+    secondNum = "";
+    operator = "";
     displayValue = "";
-    scr.textContent = displayValue;
-})
+    scr.textContent = 0;
+}
 
 function operate(operator, a, b) {
     if (operator === "+") {
