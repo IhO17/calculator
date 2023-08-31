@@ -9,9 +9,11 @@ function subtract(a, b) {
 function multiply(a, b) {
     return a * b;
 }
+
 function divide(a, b) {
     return a / b;
 }
+
 
 let firstNum = "";
 let secondNum = "";
@@ -26,7 +28,7 @@ const operators = document.querySelectorAll(".operator");
 
 numbers.forEach((button) => 
     button.addEventListener("click", function() {
-        if (displayValue.length < 15) {
+        if (displayValue.length < 14) {
             displayValue += button.textContent;
         }
         scr.textContent = displayValue;
@@ -34,22 +36,32 @@ numbers.forEach((button) =>
 
 operators.forEach((button) =>
     button.addEventListener("click", function() {
-        if (operator === "") {
-            if (firstNum === "") {
-                firstNum = parseInt(displayValue);
-                console.log("1st " + firstNum);
-            }
+        
+        if operator
+        
+        if (firstNum === "") {
+            firstNum = parseInt(displayValue);
+            //console.log("First num: " + firstNum);
             operator = button.textContent;
-        } else {
+            //console.log("Operator: " + operator);
+
+        } else if (operator === "/" && displayValue === "0") {
+            scr.textContent = "lul";
+
+        } else {            
             secondNum = parseInt(displayValue);
-            console.log("2nd " + secondNum);
+            //console.log("First num: " + firstNum);
+            //console.log("Second num: " + secondNum);
+            //console.log("Operator: " + operator);
             let result = operate(operator, firstNum, secondNum);
+            operator = button.textContent;
+            //console.log("Operator: " + operator);
             scr.textContent = result;
-            firstNum = result;
-            operator = "";
+            firstNum = result;      
             secondNum = "";
-            
+     
         }
+        
         displayValue = "";
 
     }))
